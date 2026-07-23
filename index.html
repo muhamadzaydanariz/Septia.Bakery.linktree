@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Septia Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=DM+Sans:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:   #FBF1E1;
+    --cream2:  #F2E1BE;
+    --paper:   #FFFDF8;
+    --maroon:  #7A2222;
+    --maroon-d:#571414;
+    --gold:    #C89440;
+    --gold-lt: #E4C685;
+    --ink:     #3A2415;
+    --ink-dim: #7c624a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, var(--cream2) 0%, var(--cream) 55%);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 44px 20px 40px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* subtle wheat-grain texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(122,34,34,0.025) 0px,
+      rgba(122,34,34,0.025) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+    pointer-events: none;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* ---- Logo ---- */
+  .logo-wrap {
+    position: relative;
+    width: 172px;
+    height: 172px;
+    margin-bottom: 6px;
+  }
+  .logo-glow {
+    position: absolute;
+    inset: -22px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,148,64,0.35) 0%, rgba(200,148,64,0) 70%);
+    filter: blur(2px);
+  }
+  .logo-wrap img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 4px var(--paper),
+      0 0 0 5px var(--gold),
+      0 14px 30px rgba(87,20,20,0.28);
+    animation: settle .7s cubic-bezier(.2,.9,.3,1.2);
+  }
+  @keyframes settle {
+    from { opacity: 0; transform: scale(.9) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ---- Tagline ---- */
+  .tagline-main {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.32rem;
+    color: var(--maroon-d);
+    text-align: center;
+    line-height: 1.35;
+    margin: 18px 0 10px;
+    max-width: 300px;
+  }
+
+  .stamp {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    background: var(--gold-lt);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    padding: 5px 16px;
+    margin-bottom: 30px;
+  }
+
+  /* ---- Link tags ---- */
+  .tags {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tag {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
+    padding: 14px 18px 14px 14px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(122,34,34,0.14);
+    box-shadow: 0 2px 0 rgba(122,34,34,0.08), 0 8px 18px rgba(87,20,20,0.10);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .tag:hover, .tag:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 0 rgba(122,34,34,0.12), 0 14px 26px rgba(87,20,20,0.18);
+    border-color: var(--gold);
+  }
+  .tag:focus-visible {
+    outline: 2px solid var(--maroon);
+    outline-offset: 3px;
+  }
+
+  .tag-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(155deg, var(--gold-lt), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 1.5px rgba(122,34,34,0.25);
+  }
+  .tag-icon svg { width: 21px; height: 21px; fill: var(--maroon-d); }
+
+  .tag-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .tag-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    color: var(--maroon-d);
+  }
+  .tag-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-dim);
+    margin-top: 2px;
+  }
+
+  .tag-arrow {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    opacity: .35;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .tag:hover .tag-arrow { transform: translateX(3px); opacity: .7; }
+
+  /* ---- Footer / address ---- */
+  footer {
+    margin-top: 38px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    max-width: 300px;
+    text-align: center;
+  }
+  .addr {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+  .addr b {
+    display: block;
+    color: var(--maroon);
+    letter-spacing: 0.14em;
+    margin-bottom: 3px;
+  }
+
+  .divider {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 34px 0 6px;
+    color: var(--gold);
+  }
+  .divider svg { flex: none; width: 14px; height: 14px; fill: var(--gold); }
+  .divider .line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="logo-wrap">
+      <div class="logo-glow"></div>
+      <img src="logo.png" alt="Septia Bakery">
+    </div>
+
+    <p class="tagline-main">Roti Manis Berbagai Macam Varian</p>
+    <span class="stamp">Fresh Setiap Hari</span>
+
+    <nav class="tags">
+      <a class="tag" href="https://wa.me/6285697778557" target="_blank" rel="noopener">
+        <span class="tag-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.7.9-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7.2 7.2 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4c0-.1-.5-1.3-.7-1.8s-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3A2.7 2.7 0 0 0 8 9.7a4.7 4.7 0 0 0 1 2.5 10.7 10.7 0 0 0 4.1 3.6c.6.2 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c-.1-.1-.2-.2-.4-.3Z"/></svg>
+        </span>
+        <span class="tag-text">
+          <span class="tag-label">Pesan via WhatsApp</span>
+          <span class="tag-sub">Chat langsung, respon cepat</span>
+        </span>
+        <svg class="tag-arrow" viewBox="0 0 24 24"><path fill="var(--maroon)" d="M9 6l6 6-6 6" stroke="var(--maroon)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="tag" href="https://www.instagram.com/septia_bakery?igsh=MW0xcXRnNjc1YmE5cg==" target="_blank" rel="noopener">
+        <span class="tag-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c2.7 0 3 0 4 .1a5.6 5.6 0 0 1 2 .3 3.5 3.5 0 0 1 2 2 5.6 5.6 0 0 1 .3 2c.1 1 .1 1.3.1 4s0 3-.1 4a5.6 5.6 0 0 1-.3 2 3.5 3.5 0 0 1-2 2 5.6 5.6 0 0 1-2 .3c-1 .1-1.3.1-4 .1s-3 0-4-.1a5.6 5.6 0 0 1-2-.3 3.5 3.5 0 0 1-2-2 5.6 5.6 0 0 1-.3-2c-.1-1-.1-1.3-.1-4s0-3 .1-4a5.6 5.6 0 0 1 .3-2 3.5 3.5 0 0 1 2-2 5.6 5.6 0 0 1 2-.3c1-.1 1.3-.1 4-.1Zm0 1.8c-2.6 0-2.9 0-4 .1a3.9 3.9 0 0 0-1.4.2 2.3 2.3 0 0 0-1.3 1.3 3.9 3.9 0 0 0-.2 1.4c-.1 1.1-.1 1.4-.1 4s0 2.9.1 4a3.9 3.9 0 0 0 .2 1.4 2.3 2.3 0 0 0 1.3 1.3 3.9 3.9 0 0 0 1.4.2c1.1.1 1.4.1 4 .1s2.9 0 4-.1a3.9 3.9 0 0 0 1.4-.2 2.3 2.3 0 0 0 1.3-1.3 3.9 3.9 0 0 0 .2-1.4c.1-1.1.1-1.4.1-4s0-2.9-.1-4a3.9 3.9 0 0 0-.2-1.4 2.3 2.3 0 0 0-1.3-1.3 3.9 3.9 0 0 0-1.4-.2c-1.1-.1-1.4-.1-4-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-2a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg>
+        </span>
+        <span class="tag-text">
+          <span class="tag-label">Instagram</span>
+          <span class="tag-sub">@septia_bakery</span>
+        </span>
+        <svg class="tag-arrow" viewBox="0 0 24 24"><path stroke="var(--maroon)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="tag" href="https://www.tiktok.com/@septia.bakery?_r=1&_t=ZS-98GSfIYnpZs" target="_blank" rel="noopener">
+        <span class="tag-icon">
+          <svg viewBox="0 0 24 24"><path d="M16.6 2c.3 2.3 1.6 3.7 4 3.9v2.9c-1.4 0-2.7-.4-3.9-1.2v6.4a5.9 5.9 0 1 1-5.1-5.9v3a3 3 0 1 0 2.1 2.9V2h2.9Z"/></svg>
+        </span>
+        <span class="tag-text">
+          <span class="tag-label">TikTok</span>
+          <span class="tag-sub">@septia.bakery</span>
+        </span>
+        <svg class="tag-arrow" viewBox="0 0 24 24"><path stroke="var(--maroon)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="tag" href="https://septia-bakery.ai.studio/" target="_blank" rel="noopener">
+        <span class="tag-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-3a15 15 0 0 0-1.3-4.2A8.1 8.1 0 0 1 18.9 8ZM12 4c.7 0 1.8 1.6 2.3 4h-4.6c.5-2.4 1.6-4 2.3-4ZM4.3 14a8.2 8.2 0 0 1 0-4h3.3a16.7 16.7 0 0 0 0 4Zm.8 2h3a15 15 0 0 0 1.3 4.2A8.1 8.1 0 0 1 5.1 16Zm3-8h-3a8.1 8.1 0 0 1 4.3-4.2A15 15 0 0 0 8.1 8ZM12 20c-.7 0-1.8-1.6-2.3-4h4.6c-.5 2.4-1.6 4-2.3 4Zm2.7-6H9.3a14.3 14.3 0 0 1 0-4h5.4a14.3 14.3 0 0 1 0 4Zm.9 5.8a15 15 0 0 0 1.3-4.2h3a8.1 8.1 0 0 1-4.3 4.2Zm1.6-6.2a16.7 16.7 0 0 0 0-4h3.3a8.2 8.2 0 0 1 0 4Z"/></svg>
+        </span>
+        <span class="tag-text">
+          <span class="tag-label">Kunjungi Website</span>
+          <span class="tag-sub">Katalog &amp; pemesanan online</span>
+        </span>
+        <svg class="tag-arrow" viewBox="0 0 24 24"><path stroke="var(--maroon)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+
+    <div class="divider">
+      <div class="line"></div>
+      <svg viewBox="0 0 24 24"><path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11Z"/></svg>
+      <div class="line"></div>
+    </div>
+
+    <footer>
+      <div class="addr">
+        <b>Kunjungi Kami</b>
+        Kukun RT 10 RW 05, Desa Ciantra,<br>
+        Cikarang Selatan, Bekasi, Jawa Barat
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
